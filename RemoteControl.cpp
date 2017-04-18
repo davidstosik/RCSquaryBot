@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include "RemoteControl.h"
 
 #include "SerialLog.h"

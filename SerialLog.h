@@ -1,6 +1,8 @@
 #ifndef SERIAL_LOG_H
 #define SERIAL_LOG_H
 
+#include <Arduino.h>
+
 #define SERIAL_LOG_DEFAULT_BUFFER_SIZE 128
 
 #define LEVEL_ALL 0

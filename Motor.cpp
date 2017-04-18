@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include "Motor.h"
 
 #include "SerialLog.h"

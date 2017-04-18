@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 #include "SerialLog.h"
 #include "Powertrain.h"
 #include "RemoteControl.h"

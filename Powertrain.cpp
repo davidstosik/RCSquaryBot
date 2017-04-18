@@ -1,7 +1,5 @@
-#include <Arduino.h>
 #include "Powertrain.h"
 
-#include "Motor.h"
 #include "SerialLog.h"
 
 Powertrain::Powertrain() :

@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include "SerialLog.h"
 
 int SerialLog::m_nBufferSize;
