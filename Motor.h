@@ -1,24 +1,23 @@
-#include <Servo.h>
 #ifndef MOTOR_H
 #define MOTOR_H
 
-class Motor
+#include <Servo.h>
+
+class Motor : private Servo
 {
 public:
-  Motor(int servoPin, int neutral, int backward, int forward);
+  Motor();
+  void attach(int pin);
+  void setValues(int neutral, int backward, int forward);
   void stop();
   void goForward();
   void goBackward();
 
 private:
-  int mServoPin;
   int mNeutral;
   int mBackward;
   int mForward;
-  bool mReversed;
-  Servo mServo;
   bool isReversed();
 };
 
 #endif
-

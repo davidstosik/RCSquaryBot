@@ -5,10 +5,16 @@
 #include "SerialLog.h"
 
 Powertrain::Powertrain(int leftServoPin, int rightServoPin) :
-  mLeft(leftServoPin, 90, 180, 0),
-  mRight(rightServoPin, 90, 0, 180)
+  mLeft(),
+  mRight()
 {
   SerialLog::Trace("Powertrain::Powertrain(%d, %d)", leftServoPin, rightServoPin);
+
+  mLeft.attach(leftServoPin);
+  mRight.attach(leftServoPin);
+
+  mLeft.setValues(90, 180, 0);
+  mRight.setValues(90, 0, 180);
 }
 
 void Powertrain::stop()
