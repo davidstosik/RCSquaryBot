@@ -3,20 +3,27 @@
 
 #include "SerialLog.h"
 
-RemoteControl::RemoteControl(int pin) :
-  mReceiver(pin)
+RemoteControl::RemoteControl() :
+  IRrecv(0)
 {
-  SerialLog::Trace("RemoteControl::RemoteControl(%d)", pin);
-  
+  SerialLog::Trace("RemoteControl::RemoteControl()");
+
   mDeviceCodeLength = 0;
   mDeviceCode = 0;
-  mReceiver.enableIRIn();
 }
 
-void RemoteControl::SetDevice(int nCodeLength, unsigned long nCode)
+void RemoteControl::Attach(int recvpin)
 {
-  SerialLog::Trace("RemoteControl::SetDevice(%d, 0x%08lx)", nCodeLength, nCode);
-  
+  SerialLog::Trace("RemoteControl::Attach(%d)", recvpin);
+
+  irparams.recvpin = recvpin;
+  enableIRIn();
+}
+
+void RemoteControl::SetDeviceCode(int nCodeLength, unsigned long nCode)
+{
+  SerialLog::Trace("RemoteControl::SetDeviceCode(%d, 0x%08lx)", nCodeLength, nCode);
+
   mDeviceCodeLength = nCodeLength;
   mDeviceCode = nCode;
 }
@@ -27,9 +34,9 @@ unsigned long RemoteControl::GetRemoteCode()
 
   decode_results ir_results;
 
-  if (!mReceiver.decode(&ir_results)) { return REMOTE_UNPRESSED; }
+  if (!decode(&ir_results)) { return REMOTE_UNPRESSED; }
   unsigned long result = (&ir_results)->value;
-  mReceiver.resume();
+  resume();
   if (!MatchesDevice(result)) { return REMOTE_UNPRESSED; }
 
   SerialLog::Debug("[REMOTECONTROL] Remote code received: 0x%08lx", result);
@@ -40,9 +47,9 @@ unsigned long RemoteControl::GetRemoteCode()
 bool RemoteControl::MatchesDevice(unsigned long nCode)
 {
   SerialLog::Trace("RemoteControl::MatchesDevice(0x%08lx)", nCode);
-  
+
   bool result = mDeviceCode == GetDevicePrefix(nCode);
-  
+
   SerialLog::Trace("RemoteControl::MatchesDevice => %s", result ? "true" : "false");
   return result;
 }
@@ -50,11 +57,10 @@ bool RemoteControl::MatchesDevice(unsigned long nCode)
 unsigned long RemoteControl::GetDevicePrefix(unsigned long nCode)
 {
   SerialLog::Trace("RemoteControl::GetDevicePrefix(0x%08lx)", nCode);
-  
+
   int shiftCount = 8 * sizeof(nCode) - mDeviceCodeLength;
   unsigned long result = nCode >> shiftCount;
-  
+
   SerialLog::Trace("RemoteControl::GetDevicePrefix => 0x%08lx", result);
   return result;
 }
-

@@ -5,15 +5,15 @@
 
 #define REMOTE_UNPRESSED 0 // Meta code expressing "no button pressed"
 
-class RemoteControl
+class RemoteControl : private IRrecv
 {
 public:
-  RemoteControl(int pin);
+  RemoteControl();
+  void Attach(int recvpin);
+  void SetDeviceCode(int nCodeLength, unsigned long nCode);
   unsigned long GetRemoteCode();
-  void SetDevice(int nCodeLength, unsigned long nCode);
 
 private:
-  IRrecv mReceiver;
   int mDeviceCodeLength;
   unsigned long mDeviceCode;
   bool MatchesDevice(unsigned long nCode);
