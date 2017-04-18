@@ -1,5 +1,4 @@
-#ifndef MOTOR_H
-#define MOTOR_H
+#pragma once
 
 #include <Servo.h>
 
@@ -19,5 +18,3 @@ private:
   int mForward;
   bool isReversed();
 };
-
-#endif

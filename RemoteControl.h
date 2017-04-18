@@ -1,5 +1,4 @@
-#ifndef REMOTE_CONTROL_H
-#define REMOTE_CONTROL_H
+#pragma once
 
 #include <IRremote.h>
 
@@ -19,5 +18,3 @@ private:
   bool MatchesDevice(unsigned long nCode);
   unsigned long GetDevicePrefix(unsigned long nCode);
 };
-
-#endif

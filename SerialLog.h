@@ -1,5 +1,4 @@
-#ifndef SERIAL_LOG_H
-#define SERIAL_LOG_H
+#pragma once
 
 #include <Arduino.h>
 
@@ -39,5 +38,3 @@ private:
   SerialLog();
   static void SerialLog::VWrite(uint8_t nLevel, const char *szFormat, va_list args, int nSize = 0);
 };
-
-#endif
