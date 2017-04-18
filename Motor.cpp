@@ -12,7 +12,6 @@ Motor::Motor() :
 void Motor::attach(int pin)
 {
   SerialLog::Trace("Motor::attach(%d)", pin);
-
   Servo::attach(pin);
 }
 

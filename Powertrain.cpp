@@ -4,14 +4,19 @@
 #include "Motor.h"
 #include "SerialLog.h"
 
-Powertrain::Powertrain(int leftServoPin, int rightServoPin) :
+Powertrain::Powertrain() :
   mLeft(),
   mRight()
 {
-  SerialLog::Trace("Powertrain::Powertrain(%d, %d)", leftServoPin, rightServoPin);
+  SerialLog::Trace("Powertrain::Powertrain()");
+}
+
+void Powertrain::attach(int leftServoPin, int rightServoPin)
+{
+  SerialLog::Trace("Powertrain::attach(%d, %d)", leftServoPin, rightServoPin);
 
   mLeft.attach(leftServoPin);
-  mRight.attach(leftServoPin);
+  mRight.attach(rightServoPin);
 
   mLeft.setValues(90, 180, 0);
   mRight.setValues(90, 0, 180);

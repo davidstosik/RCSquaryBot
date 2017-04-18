@@ -6,7 +6,8 @@
 class Powertrain
 {
 public:
-  Powertrain(int leftServoPin, int rightServoPin);
+  Powertrain();
+  void attach(int leftServoPin, int rightServoPin);
   void stop();
   void goForward();
   void goBackward();

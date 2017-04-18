@@ -11,7 +11,7 @@
 #define PIN_RIGHT_SERVO 10
 #define PIN_IR_RECEIVER 11
 
-Powertrain* pt;
+Powertrain pt;
 RemoteControl remote;
 
 void beginLog()
@@ -27,10 +27,9 @@ void setup()
   beginLog();
   SerialLog::Info("Starting setup");
 
-  pt = new Powertrain(PIN_LEFT_SERVO, PIN_RIGHT_SERVO);
+  pt.attach(PIN_LEFT_SERVO, PIN_RIGHT_SERVO);
   remote.Attach(PIN_IR_RECEIVER);
   remote.SetDeviceCode(REMOTE_BENQ_DEVICE_CODE_LENGTH, REMOTE_BENQ_DEVICE_CODE);
-  pt->stop();
 
   SerialLog::Info("Finished setup");
 }
@@ -40,22 +39,22 @@ void loop()
   switch(remote.GetRemoteCode())
   {
     case(REMOTE_UP):
-      pt->goForward();
+      pt.goForward();
       delay(500);
       break;
     case(REMOTE_DOWN):
-      pt->goBackward();
+      pt.goBackward();
       delay(500);
       break;
     case(REMOTE_LEFT):
-      pt->rotateLeft();
+      pt.rotateLeft();
       delay(500);
       break;
     case(REMOTE_RIGHT):
-      pt->rotateRight();
+      pt.rotateRight();
       delay(500);
       break;
   }
-  pt->stop();
+  pt.stop();
   delay(10);
 }
