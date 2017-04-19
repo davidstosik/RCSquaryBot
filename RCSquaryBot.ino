@@ -7,8 +7,8 @@
 #define LOG_LEVEL LEVEL_ALL
 
 // Pin numbers
-#define PIN_LEFT_SERVO 9
-#define PIN_RIGHT_SERVO 10
+#define PIN_SERVO_LEFT 9
+#define PIN_SERVO_RIGHT 10
 #define PIN_IR_RECEIVER 11
 
 Robot robot;
@@ -26,7 +26,7 @@ void setup()
   beginLog();
   SerialLog::Info("Starting setup");
 
-  robot.attachPowertrain(PIN_LEFT_SERVO, PIN_RIGHT_SERVO);
+  robot.attachPowertrain(PIN_SERVO_LEFT, PIN_SERVO_RIGHT);
   robot.attachRemote(PIN_IR_RECEIVER);
 
   SerialLog::Info("Finished setup");
