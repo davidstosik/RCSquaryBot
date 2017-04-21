@@ -25,25 +25,55 @@ void Robot::attachRemote(int pin)
 
 void Robot::loop()
 {
+  SerialLog::Trace("Robot::loop()");
+
   switch(mRemote.GetRemoteCode())
   {
     case(REMOTE_UP):
+      mState = FORWARD;
       mPowertrain.goForward();
-      delay(500);
+      stop(1000);
       break;
     case(REMOTE_DOWN):
+      mState = BACKWARD;
       mPowertrain.goBackward();
-      delay(500);
+      stop(1000);
       break;
     case(REMOTE_LEFT):
+      mState = ROTATE_LEFT;
       mPowertrain.rotateLeft();
-      delay(500);
+      stop(1000);
       break;
     case(REMOTE_RIGHT):
+      mState = ROTATE_RIGHT;
       mPowertrain.rotateRight();
-      delay(500);
+      stop(1000);
       break;
   }
-  mPowertrain.stop();
-  delay(10);
+
+  if (shouldStop())
+  {
+    stop();
+  }
+}
+
+void Robot::stop(unsigned long time = 0)
+{
+  SerialLog::Trace("Robot::stop(%lu)", time);
+
+  if (time == 0)
+  {
+    mStopAt = 0;
+    mPowertrain.stop();
+    mState = STOPPED;
+  } else {
+    mStopAt = millis() + time;
+  }
+}
+
+bool Robot::shouldStop()
+{
+  SerialLog::Trace("Robot::shouldStop()");
+
+  return mStopAt > 0 && mStopAt < millis();
 }
