@@ -12,6 +12,6 @@ public:
   void loop();
 
 private:
-  Powertrain powertrain;
-  RemoteControl remote;
+  Powertrain mPowertrain;
+  RemoteControl mRemote;
 };
