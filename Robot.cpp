@@ -5,7 +5,8 @@
 
 Robot::Robot() :
   mPowertrain(),
-  mRemote()
+  mRemote(),
+  mCollisionDetector()
 {
   SerialLog::Trace("Robot::Robot()");
   mRemote.SetDeviceCode(REMOTE_BENQ_DEVICE_CODE_LENGTH, REMOTE_BENQ_DEVICE_CODE);
@@ -23,9 +24,23 @@ void Robot::attachRemote(int pin)
   mRemote.Attach(pin);
 }
 
+void Robot::attachCollisionDetector(int triggerPin, int echoPin)
+{
+  SerialLog::Trace("Robot::attachCollisionDetector(%d, %d)", triggerPin, echoPin);
+  mCollisionDetector.attach(triggerPin, echoPin);
+}
+
+void Robot::setCollisionMaxDistance(unsigned int maxDistance)
+{
+  SerialLog::Trace("Robot::setCollisionMaxDistance(%d)", maxDistance);
+  mCollisionDetector.setMaxDistance(maxDistance);
+}
+
 void Robot::loop()
 {
   SerialLog::Trace("Robot::loop()");
+
+  mCollisionDetector.loop();
 
   switch(mRemote.GetRemoteCode())
   {
@@ -75,5 +90,8 @@ bool Robot::shouldStop()
 {
   SerialLog::Trace("Robot::shouldStop()");
 
-  return mStopAt > 0 && mStopAt < millis();
+  bool result = false;
+  result = result || mState == FORWARD && mCollisionDetector.isTooClose();
+  result = result || mStopAt > 0 && mStopAt < millis();
+  return result;
 }
