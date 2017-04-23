@@ -37,7 +37,7 @@ private:
   static int m_nBufferSize;
   static bool ShouldLog(uint8_t nLevel);
   SerialLog();
-  static void SerialLog::VWrite(uint8_t nLevel, const char *szFormat, va_list args, int nSize = 0);
+  static void VWrite(uint8_t nLevel, const char *szFormat, va_list args, int nSize = 0);
 };
 
 #endif

@@ -18,7 +18,7 @@
 #define PIN_SONAR_TRIGGER 13
 
 Robot robot;
-Led redLed, orangeLed, greenLed;;
+Led redLed, orangeLed, greenLed;
 
 void beginLog()
 {
