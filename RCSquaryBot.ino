@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+#include "SerialDebug.h"
 #include "Robot.h"
 #include "Led.h"
 
@@ -18,6 +19,7 @@ Led redLed, orangeLed, greenLed;
 
 void setup()
 {
+  S_DEBUG_INIT;
 
   robot.attachPowertrain(PIN_SERVO_LEFT, PIN_SERVO_RIGHT);
   robot.attachRemote(PIN_IR_RECEIVER);
@@ -32,6 +34,7 @@ void setup()
   orangeLed.blink(200, 67);
   greenLed.blink(200, 133);
 
+  S_DEBUG("setup() -- END");
 }
 
 void loop()

@@ -1,12 +1,15 @@
 #include "Robot.h"
 
 #include "BenQRemote.h"
+#include "SerialDebug.h"
 
 Robot::Robot() :
   mPowertrain(),
   mRemote(),
   mCollisionDetector()
 {
+  S_DEBUG_INIT;
+
   mRemote.SetDeviceCode(REMOTE_BENQ_DEVICE_CODE_LENGTH, REMOTE_BENQ_DEVICE_CODE);
 }
 
