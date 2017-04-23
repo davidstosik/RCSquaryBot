@@ -1,4 +1,5 @@
-#pragma once
+#ifndef Powertrain_h
+#define Powertrain_h
 
 #include "Motor.h"
 
@@ -17,3 +18,5 @@ private:
   Motor mLeft;
   Motor mRight;
 };
+
+#endif

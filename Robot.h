@@ -1,4 +1,5 @@
-#pragma once
+#ifndef Robot_h
+#define Robot_h
 
 #include "Powertrain.h"
 #include "RemoteControl.h"
@@ -24,3 +25,5 @@ private:
   void stop(unsigned long time = 0);
   bool shouldStop();
 };
+
+#endif

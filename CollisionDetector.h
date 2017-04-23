@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CollisionDetector_h
+#define CollisionDetector_h
 
 #include <NewPingNoTimer.h>
 
@@ -20,3 +21,5 @@ private:
   unsigned long mLastMeasure;
   bool shouldMeasure();
 };
+
+#endif

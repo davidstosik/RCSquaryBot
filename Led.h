@@ -1,4 +1,5 @@
-#pragma once
+#ifndef Led_h
+#define Led_h
 
 #define HALF_PERIOD 500
 
@@ -20,3 +21,5 @@ private:
   int mBlinkHalfPeriod;
   bool blinkIsOn();
 };
+
+#endif
